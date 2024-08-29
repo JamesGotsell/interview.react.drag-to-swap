@@ -1,6 +1,9 @@
 import styled from "styled-components";
-import Actions from "./actions";
 
+import Actions from "./actions";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import ImageList from "./ImageList";
 const Wrapper = styled.div`
   width: 600px;
   margin: auto;
@@ -32,38 +35,26 @@ const PageLayout = styled.div`
   justify-content: space-between;
 `;
 
-const PrintPhoto = styled.div`
-  width: calc(50% - 10px);
-
-  img {
-    max-width: 100%;
-  }
-`;
-
 export default function PrintPage({ data }) {
   return (
     <>
-      <Wrapper>
-        {Object.values(data).map((entry, i) => {
-          return (
-            <PrintWrapper key={i}>
-              <Header>
-                <Title>{entry.title}</Title>
-                <Actions />
-              </Header>
-              <PageLayout>
-                {entry.images.map((image) => {
-                  return (
-                    <PrintPhoto key={image}>
-                      <img src={image} alt="" />
-                    </PrintPhoto>
-                  );
-                })}
-              </PageLayout>
-            </PrintWrapper>
-          );
-        })}
-      </Wrapper>
+      <DndProvider backend={HTML5Backend}>
+        <Wrapper>
+          {Object.values(data).map((entry, i) => {
+            return (
+              <PrintWrapper key={i}>
+                <Header>
+                  <Title>{entry.title}</Title>
+                  <Actions />
+                </Header>
+                <PageLayout>
+                  <ImageList imagesToRender={entry.images}></ImageList>
+                </PageLayout>
+              </PrintWrapper>
+            );
+          })}
+        </Wrapper>
+      </DndProvider>
     </>
   );
 }
