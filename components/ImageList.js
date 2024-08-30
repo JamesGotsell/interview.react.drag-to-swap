@@ -20,6 +20,7 @@ const ImageList = ({ imagesToRender }) => {
       }),
     );
   };
+
   useEffect(() => {
     setImages(imagesToRender);
   }, [imagesToRender]);

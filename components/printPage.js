@@ -7,7 +7,6 @@ import ImageList from "./ImageList";
 const Wrapper = styled.div`
   width: 600px;
   margin: auto;
-  color: #585858;
 `;
 
 const PrintWrapper = styled.div``;
@@ -28,7 +27,6 @@ const Title = styled.div`
 const PageLayout = styled.div`
   display: flex;
   flex-wrap: wrap;
-  background: #2778a5;
   border-radius: 8px;
   padding: 20px;
   margin: 17px 0 42px;

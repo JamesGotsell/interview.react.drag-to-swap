@@ -1,20 +1,28 @@
 import styled from "styled-components";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 const PrintPhoto = styled.div`
   width: calc(50% - 10px);
-
-  img {
+  .img {
     max-width: 100%;
-    width:  ${(props) => (props.$clicked ? "200px" : "100%")};
-    border-radius:  ${(props) => (props.$clicked ? "50%" : "0%")};
-  }
-  background-color ${(props) => (props.$clicked ? "blue" : "red")};
+    clip-path: circle(75%);
+     background: transparent
+    cursor: pointer;
+    display:block;
+    animation-play-state: paused;
+     border: solid;
 
+  }
+  .img:hover {
+     clip-path: circle(25%);
+      border: 1px solid black;
+      transition: clip-path 0.1s linear;
+      animation-play-state: running;
+      animation-iteration-count: 1;
+  }
 `;
 
 export const Image = ({ image, index, moveImage }) => {
-  const [clicked, setClick] = useState(false);
   const [, drop] = useDrop({
     accept: "Image",
     hover(item) {
@@ -39,23 +47,14 @@ export const Image = ({ image, index, moveImage }) => {
       };
     },
   }));
-
   const ref = useRef(null);
   drag(drop(ref));
+
   return (
-    <PrintPhoto
-      key={image}
-      ref={ref}
-      className="Image-item"
-      onMouseDown={() => {
-        setClick(!clicked);
-      }}
-      onMouseUp={() => {
-        setClick(clicked);
-      }}
-      $clicked={!clicked}
-    >
-      <img alt={`img-${image}`} src={image} className="img" />
+    <PrintPhoto key={image} ref={ref} className="Image-item">
+      <span className="wrapper">
+        <img alt={`img-${image}`} src={image} className="img" />
+      </span>
     </PrintPhoto>
   );
 };
