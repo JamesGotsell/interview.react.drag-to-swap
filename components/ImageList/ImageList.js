@@ -1,25 +1,13 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import update from "immutability-helper";
-import { Image } from "./image";
+import { Image } from "../Image/Image";
+import { moveImage } from "../utils/utils";
 
 const RenderImage = styled.section`
   display: flex;
 `;
 const ImageList = ({ imagesToRender }) => {
   const [images, setImages] = useState([]);
-
-  const moveImage = (imageIndex, imageHoverIndex) => {
-    const draggedImage = images[imageIndex];
-    setImages(
-      update(images, {
-        $splice: [
-          [imageIndex, 1],
-          [imageHoverIndex, 0, draggedImage],
-        ],
-      }),
-    );
-  };
 
   useEffect(() => {
     setImages(imagesToRender);
@@ -30,10 +18,13 @@ const ImageList = ({ imagesToRender }) => {
       {images?.map((image, index) => {
         return (
           <Image
+            role="image"
             image={image}
             index={index}
             key={`${image}-image`}
             moveImage={moveImage}
+            images={images}
+            setImagesCb={setImages}
           />
         );
       })}

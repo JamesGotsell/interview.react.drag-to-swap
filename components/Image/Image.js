@@ -22,7 +22,7 @@ const PrintPhoto = styled.div`
   }
 `;
 
-export const Image = ({ image, index, moveImage }) => {
+export const Image = ({ image, index, moveImage, setImagesCb, images }) => {
   const [, drop] = useDrop({
     accept: "Image",
     hover(item) {
@@ -33,7 +33,7 @@ export const Image = ({ image, index, moveImage }) => {
       if (item.index === index) {
         return;
       }
-      moveImage(item.index, index);
+      moveImage(item.index, index, setImagesCb, images);
 
       item.index = index;
     },

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Actions from "./actions";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import ImageList from "./ImageList";
+import ImageList from "./ImageList/ImageList";
 const Wrapper = styled.div`
   width: 600px;
   margin: auto;
