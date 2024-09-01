@@ -1,28 +1,27 @@
 import styled from "styled-components";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
+
 const PrintPhoto = styled.div`
   width: calc(50% - 10px);
   .img {
     max-width: 100%;
-    clip-path: circle(75%);
-     background: transparent
-    cursor: pointer;
-    display:block;
-    animation-play-state: paused;
-     border: solid;
-
+    display: block;
+    border: solid;
   }
-  .img:hover {
-     clip-path: circle(25%);
-      border: 1px solid black;
-      transition: clip-path 0.1s linear;
-      animation-play-state: running;
-      animation-iteration-count: 1;
+  .img.animate {
+    clip-path: circle(25%);
+    transition: clip-path 0.1s linear;
+  }
+  .img.reverse {
+    clip-path: circle(75%);
+    transition: clip-path 0.1s linear;
   }
 `;
 
-export const Image = ({ image, index, moveImage, setImagesCb, images }) => {
+export const ImageItem = ({ image, index, moveImage, setImagesCb, images }) => {
+  const [mouseEvent, setMouseEvent] = useState(false);
+
   const [, drop] = useDrop({
     accept: "Image",
     hover(item) {
@@ -36,6 +35,9 @@ export const Image = ({ image, index, moveImage, setImagesCb, images }) => {
       moveImage(item.index, index, setImagesCb, images);
 
       item.index = index;
+    },
+    drop() {
+      setMouseEvent(false);
     },
   });
   const [, drag] = useDrag(() => ({
@@ -51,10 +53,24 @@ export const Image = ({ image, index, moveImage, setImagesCb, images }) => {
   drag(drop(ref));
 
   return (
-    <PrintPhoto key={image} ref={ref} className="Image-item">
-      <span className="wrapper">
-        <img alt={`img-${image}`} src={image} className="img" />
-      </span>
+    <PrintPhoto
+      key={image}
+      ref={ref}
+      onMouseDown={() => {
+        setMouseEvent(true);
+      }}
+      onMouseUp={() => {
+        setMouseEvent(false);
+      }}
+      onDragEnd={() => {
+        setMouseEvent(false);
+      }}
+    >
+      <img
+        alt={`img-${image}`}
+        src={image}
+        className={`img ${mouseEvent ? "animate" : "reverse"}`}
+      />
     </PrintPhoto>
   );
 };

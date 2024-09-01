@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Image } from "../Image/Image";
+import { ImageItem } from "../Image/Image";
 import { moveImage } from "../utils/utils";
 
 const RenderImage = styled.section`
@@ -17,7 +17,7 @@ const ImageList = ({ imagesToRender }) => {
     <RenderImage>
       {images?.map((image, index) => {
         return (
-          <Image
+          <ImageItem
             role="image"
             image={image}
             index={index}

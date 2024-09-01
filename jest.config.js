@@ -9,6 +9,9 @@ const customJestConfig = {
   testEnvironment: "jest-environment-jsdom",
   moduleDirectories: ["node_modules", "<rootDir>/"],
   testEnvironment: "jest-environment-jsdom",
+  transformIgnorePatterns: [
+    "<rootDir>/node_modules/(?!react-dnd|core-dnd|@react-dnd|dnd-core|react-dnd-html5-backend)",
+  ],
   bail: true,
   logHeapUsage: true,
   testTimeout: 120000,
