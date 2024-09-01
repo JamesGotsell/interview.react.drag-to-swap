@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styles from "./imagelist.module.css";
 import { ImageItem } from "../Image/Image";
 import { moveImage } from "../utils/utils";
 
-const RenderImage = styled.section`
-  display: flex;
-`;
 const ImageList = ({ imagesToRender }) => {
   const [images, setImages] = useState([]);
 
@@ -14,7 +11,7 @@ const ImageList = ({ imagesToRender }) => {
   }, [imagesToRender]);
 
   return (
-    <RenderImage>
+    <section className={styles.renderImage}>
       {images?.map((image, index) => {
         return (
           <ImageItem
@@ -28,7 +25,7 @@ const ImageList = ({ imagesToRender }) => {
           />
         );
       })}
-    </RenderImage>
+    </section>
   );
 };
 

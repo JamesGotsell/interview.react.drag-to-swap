@@ -1,0 +1,18 @@
+.printPhoto {
+  width: calc(50% - 10px);
+}
+.img {
+  max-width: 100%;
+  display: block;
+  border: solid;
+}
+
+.animate {
+  clip-path: circle(25%);
+  transition: clip-path 0.1s linear;
+}
+
+.reverse {
+  clip-path: circle(75%);
+  transition: clip-path 0.1s linear;
+}
