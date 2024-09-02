@@ -16,8 +16,16 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Notes
 
-Feel free to modify the source code in anyway that you see fit.
+###  Tech used 
 
----
+* react drag and drop 
+* css modules in the Image list , and Image component
 
-<sup>Popsa.com</sup>
+#### Reasons 
+- decided to use react dnd for the drag and drop functionally, some issues with getting to reactdnd work with React Testing Lib.  
+- created a utils file with a function called move image - that swaps image url within drag and drop functionally, with a unit test
+- using mouse events to style image to align closely with the example using transitions and clip-path
+
+#### improvements
+
+* I would use playwright for e2e test for testing the UI functionally in the context of a running app
